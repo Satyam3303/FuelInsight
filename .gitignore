@@ -1,0 +1,57 @@
+# Build artifacts
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.cache
+*.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test output
+TestResults/
+
+# Publish output
+publish/
+
+# Node dependencies (if any)
+node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+
+# Ignore compiled binaries
+*.exe
+*.dll
+*.pdb
+*.mdb
+
+# Visual Studio Code
+.vscode/
