@@ -45,10 +45,6 @@ const FUEL_TYPES = [
 
   { label: "Ethanol", value: "ethanol" },
   { label: "Hydrogen", value: "hydrogen" },
-
-  { label: "Home Charging", value: "homeCharging" },
-  { label: "Public AC", value: "publicAC" },
-  { label: "Public DC", value: "publicDC" },
 ];
 
 const fuelLabels = {
@@ -71,14 +67,6 @@ const fuelLabels = {
 
   ethanol: "Ethanol",
   hydrogen: "Hydrogen",
-
-  homeCharging: "Home Charging",
-  publicAC: "Public AC Charging",
-  publicDC: "Public DC Fast Charging",
-
-  centralExcise: "Central Excise",
-  stateVAT: "State VAT",
-  dealerCommission: "Dealer Commission",
 };
 
 function ComparePage() {
@@ -234,10 +222,6 @@ function ComparePage() {
             "Alternative Fuels",
             result.comparisons.alternative,
           )}
-
-          {renderComparisonTable("EV Charging", result.comparisons.ev)}
-
-          {renderComparisonTable("Taxes", result.comparisons.taxes)}
         </>
       )}
       {result && result.fuelType && (

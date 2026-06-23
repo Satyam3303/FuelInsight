@@ -17,8 +17,4 @@ export const FUEL_TYPES = {
 
   ethanol: ["fuels", "alternative", "ethanol"],
   hydrogen: ["fuels", "alternative", "hydrogen"],
-
-  homeCharging: ["fuels", "ev", "homeCharging"],
-  publicAC: ["fuels", "ev", "publicAC"],
-  publicDC: ["fuels", "ev", "publicDC"],
 };

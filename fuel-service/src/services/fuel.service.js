@@ -49,6 +49,13 @@ export const compareFuelPrices = async (city1, city2, fuelType) => {
     (city) => city.city.toLowerCase() === city2.toLowerCase(),
   );
 
+  if (!firstCity || !secondCity) {
+  throw new AppError(
+    ERROR_MESSAGES.CITIES_NOT_FOUND,
+    HTTP_STATUS_CODES.NOT_FOUND,
+  );
+}
+
   if (!fuelType) {
     return {
       city1: firstCity.city,
@@ -208,70 +215,6 @@ export const compareFuelPrices = async (city1, city2, fuelType) => {
               (
                 secondCity.fuels.alternative.hydrogen -
                 firstCity.fuels.alternative.hydrogen
-              ).toFixed(2),
-            ),
-          },
-        },
-
-        ev: {
-          homeCharging: {
-            city1: firstCity.fuels.ev.homeCharging,
-            city2: secondCity.fuels.ev.homeCharging,
-            difference: Number(
-              (
-                secondCity.fuels.ev.homeCharging -
-                firstCity.fuels.ev.homeCharging
-              ).toFixed(2),
-            ),
-          },
-
-          publicAC: {
-            city1: firstCity.fuels.ev.publicAC,
-            city2: secondCity.fuels.ev.publicAC,
-            difference: Number(
-              (
-                secondCity.fuels.ev.publicAC - firstCity.fuels.ev.publicAC
-              ).toFixed(2),
-            ),
-          },
-
-          publicDC: {
-            city1: firstCity.fuels.ev.publicDC,
-            city2: secondCity.fuels.ev.publicDC,
-            difference: Number(
-              (
-                secondCity.fuels.ev.publicDC - firstCity.fuels.ev.publicDC
-              ).toFixed(2),
-            ),
-          },
-        },
-
-        taxes: {
-          centralExcise: {
-            city1: firstCity.taxes.centralExcise,
-            city2: secondCity.taxes.centralExcise,
-            difference: Number(
-              (
-                secondCity.taxes.centralExcise - firstCity.taxes.centralExcise
-              ).toFixed(2),
-            ),
-          },
-
-          stateVAT: {
-            city1: firstCity.taxes.stateVAT,
-            city2: secondCity.taxes.stateVAT,
-            difference: Number(
-              (secondCity.taxes.stateVAT - firstCity.taxes.stateVAT).toFixed(2),
-            ),
-          },
-
-          dealerCommission: {
-            city1: firstCity.taxes.dealerCommission,
-            city2: secondCity.taxes.dealerCommission,
-            difference: Number(
-              (
-                secondCity.taxes.dealerCommission -
-                firstCity.taxes.dealerCommission
               ).toFixed(2),
             ),
           },

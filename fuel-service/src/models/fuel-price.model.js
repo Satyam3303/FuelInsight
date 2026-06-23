@@ -99,40 +99,6 @@ const fuelPriceSchema = new mongoose.Schema(
           min: 0,
         },
       },
-
-      ev: {
-        homeCharging: {
-          type: Number,
-          min: 0,
-        },
-
-        publicAC: {
-          type: Number,
-          min: 0,
-        },
-
-        publicDC: {
-          type: Number,
-          min: 0,
-        },
-      },
-    },
-
-    taxes: {
-      centralExcise: {
-        type: Number,
-        min: 0,
-      },
-
-      stateVAT: {
-        type: Number,
-        min: 0,
-      },
-
-      dealerCommission: {
-        type: Number,
-        min: 0,
-      },
     },
 
     metadata: {

@@ -7,14 +7,16 @@ import {
   Box,
   Chip,
   Divider,
+  Stack,
 } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 
 import api from "../api/api";
 
 function FuelPricesPage() {
   const [prices, setPrices] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPrices = async () => {
@@ -49,60 +51,109 @@ function FuelPricesPage() {
           justifyContent: "center",
         }}
       >
-        {prices.map((price) => (
-          <Card
-            key={price._id}
-            elevation={0}
-            sx={{
-              width: 300,
-              height: 340,
-              border: "1px solid rgba(255,255,255,0.08)",
-              transition: "0.3s",
+        {prices.map((price) => {
+          const fuelCount =
+            Object.keys(price.fuels.petrol).length +
+            Object.keys(price.fuels.diesel).length +
+            Object.keys(price.fuels.gas).length +
+            Object.keys(price.fuels.alternative).length;
 
-              "&:hover": {
-                transform: "translateY(-6px)",
-                borderColor: "primary.main",
-              },
-            }}
-          >
-            <CardContent>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                mb={2}
+          return (
+            <Card
+              onClick={() => navigate(`/fuel/${price.city}`)}
+              key={price._id}
+              elevation={0}
+              sx={{
+                width: 300,
+                height: 440,
+                border: "1px solid rgba(255,255,255,0.08)",
+                transition: "0.3s",
+                cursor: "pointer",
+                "&:hover": {
+                  transform: "translateY(-8px)",
+                  borderColor: "warning.main",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+                },
+              }}
+            >
+              <CardContent
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
               >
-                <Typography variant="h5" fontWeight={600}>
-                  {price.city}
-                </Typography>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  mb={2}
+                >
+                  <Box>
+                    <Typography variant="h5" fontWeight={600}>
+                      {price.city}
+                    </Typography>
 
-                <LocalGasStationIcon color="primary" />
-              </Box>
+                    <Typography variant="body2" color="text.secondary">
+                      {price.state}
+                    </Typography>
+                  </Box>
 
-              <Chip label="Live Price" color="primary" size="small" />
+                  <LocalGasStationIcon color="primary" />
+                </Box>
 
-              <Divider sx={{ my: 2 }} />
+                <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
+                  <Chip label="Petrol" size="small" color="primary" />
+                  <Chip label="Diesel" size="small" />
+                  <Chip label="Gas" size="small" />
+                </Stack>
 
-              <Typography variant="body1" sx={{ mb: 1 }}>
-                Petrol
-              </Typography>
+                <Divider sx={{ mb: 2 }} />
 
-              <Typography variant="h5" color="primary" fontWeight={700}>
-                ₹{price.petrolPrice}
-              </Typography>
+                <Box
+                  sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
+                >
+                  <Box display="flex" justifyContent="space-between">
+                    <Typography color="text.secondary">Petrol</Typography>
 
-              <Box sx={{ mt: 3 }}>
-                <Typography variant="body1" sx={{ mb: 1 }}>
-                  Diesel
-                </Typography>
+                    <Typography color="primary.main" fontWeight={700}>
+                      ₹{price.fuels?.petrol?.regular}
+                    </Typography>
+                  </Box>
 
-                <Typography variant="h5" fontWeight={700}>
-                  ₹{price.dieselPrice}
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
-        ))}
+                  <Box display="flex" justifyContent="space-between">
+                    <Typography color="text.secondary">Diesel</Typography>
+
+                    <Typography fontWeight={700}>
+                      ₹{price.fuels?.diesel?.regular}
+                    </Typography>
+                  </Box>
+
+                  <Box display="flex" justifyContent="space-between">
+                    <Typography color="text.secondary">CNG</Typography>
+
+                    <Typography fontWeight={700}>
+                      ₹{price.fuels?.gas?.cng}
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Box sx={{ mt: "auto" }}>
+                  <Divider sx={{ my: 2 }} />
+                  <Typography variant="caption" color="text.secondary">
+                    {fuelCount} Fuel Types Tracked
+                  </Typography>
+
+                  <br />
+
+                  <Typography variant="caption" color="text.secondary">
+                    Updated {new Date(price.lastUpdated).toLocaleDateString()}
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Card>
+          );
+        })}
       </Box>
     </>
   );
