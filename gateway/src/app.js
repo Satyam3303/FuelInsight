@@ -2,8 +2,9 @@ import express from "express";
 import cors from "cors";
 
 import { fuelProxy } from "./routes/fuel.routes.js";
-
+import { newsProxy } from "./routes/news.routes.js";
 console.log("Fuel Proxy:", fuelProxy);
+console.log("News Proxy:", newsProxy);
 
 const app = express();
 
@@ -15,5 +16,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/fuel", fuelProxy);
+app.use("/api/news", newsProxy);
 
 export default app;

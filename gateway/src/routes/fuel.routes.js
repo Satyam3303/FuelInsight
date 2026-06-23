@@ -9,7 +9,7 @@ console.log("Fuel Service URL:", process.env.FUEL_SERVICE_URL);
 export const fuelProxy = createProxyMiddleware({
   target: process.env.FUEL_SERVICE_URL,
   changeOrigin: true,
-  pathRewrite: {
-    "^/": "/api/fuel/",
+  pathRewrite: (path) => {
+    return `/api/fuel${path}`;
   },
 });
