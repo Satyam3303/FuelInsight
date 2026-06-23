@@ -1,12 +1,33 @@
-import FuelPricesPage from "./pages/FuelPricesPage";
+import { Link } from "react-router-dom";
+
+import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
+
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
-    <div>
-      <h1>FuelInsight</h1>
+    <>
+      {" "}
+      <AppBar position="static">
+        {" "}
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            FuelInsight{" "}
+          </Typography>
 
-      <FuelPricesPage />
-    </div>
+          <Button color="inherit" component={Link} to="/">
+            Fuel Prices
+          </Button>
+
+          <Button color="inherit" component={Link} to="/news">
+            News
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="xl" sx={{ mt: 4 }}>
+        <AppRoutes />
+      </Container>
+    </>
   );
 }
 
