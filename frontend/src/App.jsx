@@ -18,7 +18,9 @@ function App() {
           <Button color="inherit" component={Link} to="/">
             Fuel Prices
           </Button>
-
+          <Button color="inherit" component={Link} to="/compare">
+            Compare
+          </Button>
           <Button color="inherit" component={Link} to="/news">
             News
           </Button>

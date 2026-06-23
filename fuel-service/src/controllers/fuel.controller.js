@@ -14,11 +14,7 @@ export const getFuelPrices = async (req, res, next) => {
 
     const data = await fetchAllFuelPrices(state);
 
-    return sendSuccessResponse(
-      res,
-      HTTP_STATUS_CODES.OK,
-      data
-    );
+    return sendSuccessResponse(res, HTTP_STATUS_CODES.OK, data);
   } catch (error) {
     next(error);
   }
@@ -46,9 +42,16 @@ export const healthCheck = (req, res) => {
 
 export const compareCities = async (req, res, next) => {
   try {
-    const { city1, city2 } = req.query;
+    const { city1, city2, fuelType } = req.query;
 
-    const data = await compareFuelPrices(city1, city2);
+    if (!city1 || !city2) {
+      return res.status(HTTP_STATUS_CODES.BAD_REQUEST).json({
+        success: false,
+        message: "city1 and city2 are required",
+      });
+    }
+
+    const data = await compareFuelPrices(city1, city2, fuelType);
 
     return sendSuccessResponse(res, HTTP_STATUS_CODES.OK, data);
   } catch (error) {
