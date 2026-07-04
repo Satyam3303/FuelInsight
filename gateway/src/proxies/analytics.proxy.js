@@ -2,7 +2,7 @@
 import dotenv from "dotenv";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { HTTP_STATUS_CODES } from "../constants/status.codes.js";
-import { SUCCESS_MESSAGES } from "../constants/messages.js";
+import { MESSAGES } from "../constants/messages.js";
 import { apiResponse } from "../utils/api.response.js";
 import { PROXY_CONSTANTS } from "../constants/proxyConstants.js";
 dotenv.config();
@@ -22,7 +22,7 @@ export const analyticsProxy = createProxyMiddleware({
         res,
         HTTP_STATUS_CODES.GATEWAY_TIMEOUT,
         null,
-        SUCCESS_MESSAGES.GATEWAY_ANALYTICS_SERVICE_UNAVAILABLE,
+        MESSAGES.GATEWAY_ANALYTICS_SERVICE_UNAVAILABLE,
         false,
       );
     },
