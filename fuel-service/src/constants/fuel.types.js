@@ -4,17 +4,14 @@ export const FUEL_TYPES = {
   power95: ["fuels", "petrol", "power95"],
   speed97: ["fuels", "petrol", "speed97"],
   e20: ["fuels", "petrol", "e20"],
-
   regularDiesel: ["fuels", "diesel", "regular"],
   xtraGreen: ["fuels", "diesel", "xtraGreen"],
   turboJet: ["fuels", "diesel", "turboJet"],
   speedDiesel: ["fuels", "diesel", "speedDiesel"],
   bioDiesel: ["fuels", "diesel", "bioDiesel"],
-
   cng: ["fuels", "gas", "cng"],
   png: ["fuels", "gas", "png"],
   lng: ["fuels", "gas", "lng"],
-
   ethanol: ["fuels", "alternative", "ethanol"],
   hydrogen: ["fuels", "alternative", "hydrogen"],
 };

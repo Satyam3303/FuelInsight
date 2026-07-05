@@ -1,22 +1,28 @@
 import dotenv from "dotenv";
-
+import { MESSAGES } from "./constants/messages.js";
 dotenv.config();
-
 import app from "./app.js";
 import { connectDB } from "./config/db.js";
 
-if (!process.env.PORT) {
-  console.warn("PORT not defined. Using default port 3001.");
+const PORT = process.env.PORT;
+
+if (!PORT) {
+  console.error(MESSAGES.ERROR.FUEL_PORT_ERROR);
+  process.exit(1);
 }
 
-const PORT = process.env.PORT || 3001;
-
 const startServer = async () => {
-  await connectDB();
+  try {
+    await connectDB();
 
-  app.listen(PORT, () => {
-    console.log(`Fuel Service running on port ${PORT}`);
-  });
+    app.listen(PORT, () => {
+      console.log(`${MESSAGES.SUCCESS.FUEL_SERVER_START} ${PORT}`);
+    });
+  } catch (error) {
+    console.error(error);
+
+    process.exit(1);
+  }
 };
 
 startServer();

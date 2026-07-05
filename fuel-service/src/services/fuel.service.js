@@ -3,43 +3,34 @@ import {
   getFuelPriceByCity,
   getFuelPricesByCities,
 } from "../repositories/fuel.repository.js";
-
-import AppError from "../utils/app-error.js";
-
-import { ERROR_MESSAGES } from "../constants/messages.js";
-
-import { HTTP_STATUS_CODES } from "../constants/status-codes.js";
-
-import { FUEL_TYPES } from "../constants/fuel-types.js";
+import AppError from "../utils/app.error.js";
+import { MESSAGES } from "../constants/messages.js";
+import { HTTP_STATUS_CODES } from "../constants/status.codes.js";
+import { FUEL_TYPES } from "../constants/fuel.types.js";
 
 import { getNestedValue } from "../utils/get-nested-value.js";
 
 export const fetchAllFuelPrices = async (state) => {
-  return getAllFuelPrices(state);
-};
-
-export const fetchFuelPriceByCity = async (city) => {
-  const fuelPrice = await getFuelPriceByCity(city);
-
-  if (!fuelPrice) {
+  const prices = await getAllFuelPrices(state);
+  
+  if (!prices || prices.length === 0) {
     throw new AppError(
-      `${ERROR_MESSAGES.CITY_NOT_FOUND}: ${city}`,
+      MESSAGES.ERROR.STATE_NOT_FOUND,
       HTTP_STATUS_CODES.NOT_FOUND,
     );
   }
-
-  return fuelPrice;
+  return prices;
 };
 
 export const compareFuelPrices = async (city1, city2, fuelType) => {
   const cities = await getFuelPricesByCities(city1, city2);
 
-  if (cities.length !== 2) {
-    throw new AppError(
-      ERROR_MESSAGES.CITIES_NOT_FOUND,
-      HTTP_STATUS_CODES.NOT_FOUND,
-    );
-  }
+    if (cities.length !== 2) {
+      throw new AppError(
+        MESSAGES.ERROR.CITIES_NOT_FOUND,
+        HTTP_STATUS_CODES.NOT_FOUND,
+      );
+    }
 
   const firstCity = cities.find(
     (city) => city.city.toLowerCase() === city1.toLowerCase(),
@@ -50,11 +41,11 @@ export const compareFuelPrices = async (city1, city2, fuelType) => {
   );
 
   if (!firstCity || !secondCity) {
-  throw new AppError(
-    ERROR_MESSAGES.CITIES_NOT_FOUND,
-    HTTP_STATUS_CODES.NOT_FOUND,
-  );
-}
+    throw new AppError(
+      MESSAGES.ERROR.CITIES_NOT_FOUND,
+      HTTP_STATUS_CODES.NOT_FOUND,
+    );
+  }
 
   if (!fuelType) {
     return {
@@ -226,7 +217,10 @@ export const compareFuelPrices = async (city1, city2, fuelType) => {
   const path = FUEL_TYPES[fuelType];
 
   if (!path) {
-    throw new AppError("Invalid fuel type", HTTP_STATUS_CODES.BAD_REQUEST);
+    throw new AppError(
+      MESSAGES.ERROR.INVALID_FUEL_TYPE,
+      HTTP_STATUS_CODES.BAD_REQUEST,
+    );
   }
 
   const firstValue = getNestedValue(firstCity, path);
@@ -248,4 +242,17 @@ export const compareFuelPrices = async (city1, city2, fuelType) => {
 
     difference: Number((secondValue - firstValue).toFixed(2)),
   };
+};
+
+export const fetchFuelPriceByCity = async (city) => {
+  const fuelPrice = await getFuelPriceByCity(city);
+
+  if (!fuelPrice) {
+    throw new AppError(
+      MESSAGES.ERROR.CITY_NOT_FOUND,
+      HTTP_STATUS_CODES.NOT_FOUND,
+    );
+  }
+
+  return fuelPrice;
 };

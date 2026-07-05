@@ -7,8 +7,8 @@ export const healthCheck = (req, res) => {
     res,
     HTTP_STATUS_CODES.OK,
     null,
-    MESSAGES.GATEWAY_SERVICE_HEALTHY,
-    true,
+    MESSAGES.SUCCESS.GATEWAY_SERVICE_HEALTHY,
+    true, 
     true
   );
 };

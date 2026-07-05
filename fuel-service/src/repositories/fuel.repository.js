@@ -1,11 +1,11 @@
-import FuelPrice from "../models/fuel-price.model.js";
+import FuelPrice from "../models/fuel.price.model.js";
 
 export const getAllFuelPrices = async (state) => {
-  const query = {};
-
-  if (state) {
-    query.state = new RegExp(`^${state}$`, "i");
-  }
+  const query = state
+    ? {
+        state: new RegExp(`^${state}$`, "i"),
+      }
+    : {};
 
   return FuelPrice.find(query).lean();
 };

@@ -1,8 +1,28 @@
-export const SUCCESS_MESSAGES = {
-  SERVICE_HEALTHY: "Service is healthy",
-};
-
-export const ERROR_MESSAGES = {
-  CITY_NOT_FOUND: "Fuel data not found for city",
-  CITIES_NOT_FOUND: "One or more cities not found",
+export const MESSAGES = {
+  SUCCESS: {
+    FUEL_SERVICE_HEALTHY: "Fuel Service is healthy",
+    FUEL_SERVER_START: "Fuel Service running on port",
+    MONGODB_CONNECTED: "MongoDB Connected",
+    ALL_FUEL_PRICES_FETCHED: "All fuel prices fetched successfully",
+    CITIES_COMPARED: "Cities compared successfully",
+    CITY_FUEL_PRICE_FETCHED: "Fuel price for city fetched successfully",
+    SNAPSHOTS_CREATED: "Fuel snapshots created successfully.",
+    CITY_HISTORY_FETCHED: "Fuel history fetched successfully.",
+    FUEL_TREND_FETCHED: "Fuel trend fetched successfully.",
+  },
+  ERROR: {
+    FUEL_PORT_ERROR: "PORT is not defined in the environment variables",
+    CITY_NOT_FOUND: "Fuel data not found for city",
+    CITIES_NOT_FOUND: "One or more cities not found",
+    MONGODB_URI_NOT_DEFINED: "MONGODB_URI is not defined",
+    DATABASE_CONNECTION_FAILED: "Database connection failed",
+    STATE_NOT_FOUND: "Fuel data not found for state",
+    CITY1_CITY2_REQUIRED: "City1 and City2 are required",
+    INVALID_FUEL_TYPE: "Invalid fuel type",
+    INTERNAL_SERVER_ERROR: "Internal server error",
+    FUEL_TYPE_REQUIRED: "Fuel Type is required",
+    CITY_IS_REQUIRED: "city parameter is required",
+    FUEL_PRICES_NOT_FOUND: "No fuel prices available to create snapshots.",
+    FUEL_HISTORY_NOT_FOUND: "No fuel history available for the specified city.",
+  },
 };

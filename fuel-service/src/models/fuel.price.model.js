@@ -100,19 +100,6 @@ const fuelPriceSchema = new mongoose.Schema(
         },
       },
     },
-
-    metadata: {
-      metroCity: {
-        type: Boolean,
-        default: false,
-      },
-
-      tier2City: {
-        type: Boolean,
-        default: false,
-      },
-    },
-
     lastUpdated: {
       type: Date,
       default: Date.now,
@@ -121,14 +108,11 @@ const fuelPriceSchema = new mongoose.Schema(
   {
     timestamps: true,
     collection: "fuel_prices",
-  }
+  },
 );
 
 fuelPriceSchema.index({ city: 1 });
 
-const FuelPrice = mongoose.model(
-  "FuelPrice",
-  fuelPriceSchema
-);
+const FuelPrice = mongoose.model("FuelPrice", fuelPriceSchema);
 
 export default FuelPrice;

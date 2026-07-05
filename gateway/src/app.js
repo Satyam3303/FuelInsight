@@ -7,6 +7,7 @@ import { newsProxy } from "./proxies/news.proxy.js";
 import { analyticsProxy } from "./proxies/analytics.proxy.js";
 import { apiLimiter } from "./middleware/rate.limit.middleware.js";
 import healthCheck from "./routes/health.routes.js";
+import { errorHandler } from "./middleware/error.middleware.js";
 const app = express();
 
 app.use(cors());
@@ -14,7 +15,7 @@ app.use(helmet());
 app.use(compression());
 app.use(express.json());
 app.use(apiLimiter);
-
+app.use(errorHandler);
 app.use((req, res, next) => {
   console.log(req.method, req.originalUrl);
   next();
