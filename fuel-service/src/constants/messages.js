@@ -24,5 +24,6 @@ export const MESSAGES = {
     CITY_IS_REQUIRED: "city parameter is required",
     FUEL_PRICES_NOT_FOUND: "No fuel prices available to create snapshots.",
     FUEL_HISTORY_NOT_FOUND: "No fuel history available for the specified city.",
+    INVALID_API_KEY: "Invalid API key"
   },
 };

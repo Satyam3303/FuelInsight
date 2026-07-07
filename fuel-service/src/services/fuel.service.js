@@ -8,7 +8,7 @@ import { MESSAGES } from "../constants/messages.js";
 import { HTTP_STATUS_CODES } from "../constants/status.codes.js";
 import { FUEL_TYPES } from "../constants/fuel.types.js";
 
-import { getNestedValue } from "../utils/get-nested-value.js";
+import { getNestedValue } from "../utils/get.nested.value.js";
 
 export const fetchAllFuelPrices = async (state) => {
   const prices = await getAllFuelPrices(state);

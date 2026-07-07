@@ -15,7 +15,6 @@ app.use(helmet());
 app.use(compression());
 app.use(express.json());
 app.use(apiLimiter);
-app.use(errorHandler);
 app.use((req, res, next) => {
   console.log(req.method, req.originalUrl);
   next();
@@ -25,5 +24,6 @@ app.use("/api/fuel", fuelProxy);
 app.use("/api/news", newsProxy);
 app.use("/api/analytics", analyticsProxy);
 app.use("/", healthCheck);
+app.use(errorHandler);
 
 export default app;

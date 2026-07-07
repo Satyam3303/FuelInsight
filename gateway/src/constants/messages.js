@@ -7,6 +7,7 @@ export const MESSAGES = {
     GATEWAY_FUEL_SERVICE_UNAVAILABLE: "Fuel Service is unavailable",
     GATEWAY_NEWS_SERVICE_UNAVAILABLE: "News Service is unavailable",
     GATEWAY_ANALYTICS_SERVICE_UNAVAILABLE: "Analytics Service is unavailable",
-    GATEWAY_PORT_ERROR: 'PORT is not defined in the environment variables'
+    GATEWAY_PORT_ERROR: 'PORT is not defined in the environment variables',
+    RATE_LIMIT_ERROR: "Too many requests. Please try again later.",
   },
 };
