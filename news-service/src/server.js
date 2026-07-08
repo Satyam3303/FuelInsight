@@ -1,20 +1,22 @@
 import dotenv from "dotenv";
-
+import { MESSAGES } from "./constants/messages.js";
 dotenv.config();
-
 import app from "./app.js";
 import { connectDB } from "./config/db.js";
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT;
+
+if (!PORT) {
+  console.error(MESSAGES.ERROR.NEWS_PORT_ERROR);
+  process.exit(1);
+}
 
 const startServer = async () => {
   try {
     await connectDB();
 
     app.listen(PORT, () => {
-      console.log(
-        `News Service running on port ${PORT}`
-      );
+      console.log(`${MESSAGES.SUCCESS.NEWS_SERVER_START} ${PORT}`);
     });
   } catch (error) {
     console.error(error);

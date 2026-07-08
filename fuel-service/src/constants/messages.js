@@ -19,7 +19,6 @@ export const MESSAGES = {
     STATE_NOT_FOUND: "Fuel data not found for state",
     CITY1_CITY2_REQUIRED: "City1 and City2 are required",
     INVALID_FUEL_TYPE: "Invalid fuel type",
-    INTERNAL_SERVER_ERROR: "Internal server error",
     FUEL_TYPE_REQUIRED: "Fuel Type is required",
     CITY_IS_REQUIRED: "city parameter is required",
     FUEL_PRICES_NOT_FOUND: "No fuel prices available to create snapshots.",

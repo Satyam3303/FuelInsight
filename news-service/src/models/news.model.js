@@ -33,6 +33,31 @@ const newsSchema = new mongoose.Schema(
       trim: true,
     },
 
+    location: {
+      type: String,
+      trim: true,
+    },
+
+    fuelType: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+
+    importance: {
+      type: String,
+      enum: ["low", "medium", "high"],
+      default: "medium",
+    },
+
+    tags: [
+      {
+        type: String,
+        trim: true,
+        lowercase: true,
+      },
+    ],
+
     publishedAt: {
       type: Date,
       required: true,
@@ -41,11 +66,22 @@ const newsSchema = new mongoose.Schema(
   {
     timestamps: true,
     collection: "news",
-  }
+  },
 );
 
 newsSchema.index({ category: 1 });
+
 newsSchema.index({ publishedAt: -1 });
+
+newsSchema.index({ fuelType: 1 });
+
+newsSchema.index({ location: 1 });
+
+newsSchema.index({ source: 1 });
+
+newsSchema.index({ importance: 1 });
+
+newsSchema.index({ tags: 1 });
 
 const News = mongoose.model("News", newsSchema);
 
