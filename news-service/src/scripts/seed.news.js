@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import News from "../models/news.model.js";
-
+import { createRandom, stringToSeed, randomInt } from "./generators/random.js";
 import { CITIES } from "./data/cities.js";
 import { generateNews } from "./generators/news.generator.js";
 
@@ -33,36 +33,26 @@ const seedNews = async () => {
     const currentDate = new Date(startDate);
 
     while (currentDate <= endDate) {
-      // 2–6 articles every day
       const articlesToday = 2 + (currentDate.getDate() % 5);
 
       for (let i = 0; i < articlesToday; i++) {
-        const city =
-          CITIES[
-            (currentDate.getDate() + i) %
-              CITIES.length
-          ];
+        const random = createRandom(
+          stringToSeed(`${currentDate.toISOString()}-${i}`),
+        );
+
+        const city = CITIES[randomInt(random, 0, CITIES.length - 1)];
 
         news.push(
-          generateNews(
-            city.city,
-            city.state,
-            new Date(currentDate),
-            i,
-          ),
+          generateNews(city.city, city.state, new Date(currentDate), i),
         );
       }
 
-      currentDate.setDate(
-        currentDate.getDate() + 1,
-      );
+      currentDate.setDate(currentDate.getDate() + 1);
     }
 
     await News.insertMany(news);
 
-    console.log(
-      `Inserted ${news.length} news articles`,
-    );
+    console.log(`Inserted ${news.length} news articles`);
 
     process.exit(0);
   } catch (error) {
