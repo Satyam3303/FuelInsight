@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import FuelHistory from "../src/models/fuel.history.model.js";
-import FuelPrice from "../src/models/fuel-price.model.js";
+import FuelPrice from "../src/models/fuel.price.model.js";
 
 import { CITIES } from "./data/cities.js";
-import { getBaseFuelPrices } from "./data/base-prices.js";
+import { getBaseFuelPrices } from "./data/base.prices.js";
 
-import { generateFuelPrices } from "./generators/fuel-generator.js";
-import { generateHistory } from "./generators/history-generator.js";
+import { generateFuelPrices } from "./generators/fuel.generator.js";
+import { generateHistory } from "./generators/history.generator.js";
 
 dotenv.config();
 

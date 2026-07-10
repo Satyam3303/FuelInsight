@@ -31,7 +31,7 @@ export const getFuelPrices = async (req, res, next) => {
       true,
     );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -59,7 +59,7 @@ export const compareCities = async (req, res, next) => {
       true,
     );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -76,6 +76,6 @@ export const getFuelPriceByCity = async (req, res, next) => {
       MESSAGES.SUCCESS.CITY_FUEL_PRICE_FETCHED,
     );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };

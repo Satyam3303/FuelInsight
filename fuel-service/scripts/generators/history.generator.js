@@ -1,8 +1,8 @@
 import { CITIES } from "../data/cities.js";
-import { getBaseFuelPrices } from "../data/base-prices.js";
+import { getBaseFuelPrices } from "../data/base.prices.js";
 
-import { generatePriceHistory } from "./price-generator.js";
-import { generateFuelPrices } from "./fuel-generator.js";
+import { generatePriceHistory } from "./price.generator.js";
+import { generateFuelPrices } from "./fuel.generator.js";
 
 export const generateHistory = () => {
   const history = [];

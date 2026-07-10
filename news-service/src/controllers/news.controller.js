@@ -23,13 +23,13 @@ export const createNews = async (req, res, next) => {
     const article = await createNewsArticle(req.body);
     return apiResponse(
       res,
-      HTTP_STATUS_CODES.OK,
+      HTTP_STATUS_CODES.CREATED,
       article,
       MESSAGES.SUCCESS.NEWS_CREATED,
       true,
     );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -66,7 +66,7 @@ export const getAllNews = async (req, res, next) => {
       true,
     );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -82,6 +82,6 @@ export const getFeaturedNews = async (req, res, next) => {
       true,
     );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
