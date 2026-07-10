@@ -1,0 +1,59 @@
+services:
+  gateway:
+    build:
+      context: ./gateway
+    container_name: fuelinsight-gateway
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./gateway/.env
+    restart: unless-stopped
+    depends_on:
+      - fuel-service
+      - news-service
+      - analytics-service
+    networks:
+      - fuelinsight-network
+
+  fuel-service:
+    build:
+      context: ./fuel-service
+    container_name: fuelinsight-fuel
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./fuel-service/.env
+    restart: unless-stopped
+    networks:
+      - fuelinsight-network
+
+  news-service:
+    build:
+      context: ./news-service
+    container_name: fuelinsight-news
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./news-service/.env
+    restart: unless-stopped
+    networks:
+      - fuelinsight-network
+
+  analytics-service:
+    build:
+      context: ./analytics-service
+    container_name: fuelinsight-analytics
+    ports:
+      - "3003:3003"
+    env_file:
+      - ./analytics-service/.env
+    restart: unless-stopped
+    depends_on:
+      - fuel-service
+      - news-service
+    networks:
+      - fuelinsight-network
+
+networks:
+  fuelinsight-network:
+    driver: bridge
