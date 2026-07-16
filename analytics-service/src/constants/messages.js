@@ -20,5 +20,6 @@ export const MESSAGES = {
     FUEL_HISTORY_NOT_FOUND: "Fuel History Not Found",
     INVALID_FUEL_TYPE: "Invalid Fuel Type",
     PAGE_LIMIT_ERROR: "Page and limit must be positive integers",
+    STATE_NOT_FOUND: "State not Found"
   },
 };

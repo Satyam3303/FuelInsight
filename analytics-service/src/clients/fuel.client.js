@@ -24,12 +24,13 @@ export const getFuelPriceByCity = async (city) => {
   return response.data.data;
 };
 
-export const getFuelTrend = async (city, fuelType) => {
+export const getFuelTrend = async (city, fuelType, range) => {
   const response = await fuelClient.get(
     `${API_CONSTANTS.FUEL_HISTORY}/${city}/trends`,
     {
       params: {
         fuelType,
+        range,
       },
     },
   );

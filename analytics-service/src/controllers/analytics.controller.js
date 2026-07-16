@@ -22,7 +22,16 @@ export const healthCheck = (req, res) => {
 
 export const getMarketReport = async (req, res, next) => {
   try {
-    const report = await fetchMarketReport();
+    const {
+      fuelType = "regularPetrol",
+      city = "Delhi",
+      range = "30d",
+    } = req.query;
+    const report = await fetchMarketReport({
+      fuelType,
+      city,
+      range,
+    });
 
     return apiResponse(
       res,
@@ -57,7 +66,9 @@ export const getCityAnalytics = async (req, res, next) => {
 
 export const getStateAnalytics = async (req, res, next) => {
   try {
-    const data = await fetchStateAnalytics();
+    const { state } = req.query;
+
+    const data = await fetchStateAnalytics(state);
 
     return apiResponse(
       res,
@@ -73,7 +84,7 @@ export const getStateAnalytics = async (req, res, next) => {
 
 export const getTopCities = async (req, res, next) => {
   try {
-    const { limit = 10, fuelType = "regularPetrol" } = req.query;
+    const { fuelType = "regularPetrol", limit = 10 } = req.query;
 
     const data = await fetchTopCities(fuelType, Number(limit));
 
@@ -91,7 +102,7 @@ export const getTopCities = async (req, res, next) => {
 
 export const getCheapestCities = async (req, res, next) => {
   try {
-    const { limit = 10, fuelType = "regularPetrol" } = req.query;
+    const { fuelType = "regularPetrol", limit = 10 } = req.query;
 
     const data = await fetchCheapestCities(fuelType, Number(limit));
 
