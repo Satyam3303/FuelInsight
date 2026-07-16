@@ -42,7 +42,7 @@ export const getCityHistory = async (req, res, next) => {
 export const getFuelTrend = async (req, res, next) => {
   try {
     const { city } = req.params;
-    const { fuelType } = req.query;
+    const { fuelType, range = "30d" } = req.query;
 
     if (!fuelType) {
       return apiResponse(
@@ -54,7 +54,7 @@ export const getFuelTrend = async (req, res, next) => {
       );
     }
 
-    const data = await fetchFuelTrend(city, fuelType);
+    const data = await fetchFuelTrend(city, fuelType, range);
 
     return apiResponse(
       res,

@@ -45,7 +45,7 @@ export const fetchFuelHistoryByCity = async (city) => {
   return history;
 };
 
-export const fetchFuelTrend = async (city, fuelType) => {
+export const fetchFuelTrend = async (city, fuelType, range) => {
   const path = FUEL_TYPES[fuelType];
 
   if (!path) {
@@ -57,6 +57,40 @@ export const fetchFuelTrend = async (city, fuelType) => {
 
   const history = await getFuelHistoryByCity(city);
 
+  let filteredHistory = history;
+
+  switch (range) {
+    case "7d":
+      filteredHistory = history.slice(-7);
+      break;
+
+    case "30d":
+      filteredHistory = history.slice(-30);
+      break;
+
+    case "90d":
+      filteredHistory = history.slice(-90);
+      break;
+
+    case "1y":
+      filteredHistory = history.slice(-365);
+      break;
+
+    case "2y":
+      filteredHistory = history.slice(-730);
+      break;
+
+    case "all":
+      filteredHistory = history;
+      break;
+
+    default:
+      throw new AppError(
+        MESSAGES.ERROR.INVALID_RANGE,
+        HTTP_STATUS_CODES.BAD_REQUEST,
+      );
+  }
+
   if (history.length === 0) {
     throw new AppError(
       MESSAGES.ERROR.FUEL_HISTORY_NOT_FOUND,
@@ -64,28 +98,23 @@ export const fetchFuelTrend = async (city, fuelType) => {
     );
   }
 
-  const prices = history.map((snapshot) => getNestedValue(snapshot, path));
+  const prices = filteredHistory.map((snapshot) =>
+    getNestedValue(snapshot, path),
+  );
 
   return {
     city,
-
     fuelType,
-
     currentPrice: prices[prices.length - 1],
-
     highestPrice: Math.max(...prices),
-
     lowestPrice: Math.min(...prices),
-
     averagePrice: Number(
       (prices.reduce((sum, price) => sum + price, 0) / prices.length).toFixed(
         2,
       ),
     ),
-
-    trend: history.map((snapshot) => ({
+    trend: filteredHistory.map((snapshot) => ({
       date: snapshot.capturedAt.toISOString().split("T")[0],
-
       price: getNestedValue(snapshot, path),
     })),
   };

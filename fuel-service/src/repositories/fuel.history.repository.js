@@ -1,22 +1,16 @@
 import FuelHistory from "../models/fuel.history.model.js";
 
-export const createFuelSnapshot = async (
-  snapshot,
-) => {
+export const createFuelSnapshot = async (snapshot) => {
   return FuelHistory.create(snapshot);
 };
 
-export const createBulkFuelSnapshots = async (
-  snapshots,
-) => {
+export const createBulkFuelSnapshots = async (snapshots) => {
   return FuelHistory.insertMany(snapshots, {
     ordered: false,
   });
 };
 
-export const getFuelHistoryByCity = async (
-  city,
-) => {
+export const getFuelHistoryByCity = async (city) => {
   return FuelHistory.find(
     {
       city: new RegExp(`^${city}$`, "i"),
